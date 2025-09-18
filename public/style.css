@@ -1,0 +1,195 @@
+/* Layout principal */
+html,
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #0a2240;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  width: 80vw;
+  height: 110%;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: #fff;
+  color: #22223b;
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  letter-spacing: 1px;
+  margin: 0;
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 99%;
+  height: 90vh;
+  margin: 0px 9px;
+}
+
+.side-panel {
+  width: 20vw;
+  height: 96vh;
+  background: #fff;
+  box-shadow: -2px 0 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+footer {
+  background: #d90429;
+  color: #fff;
+  padding: 0;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 4vh;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.marquee {
+  white-space: nowrap;
+  display: inline-block;
+  animation: marquee 30s linear infinite;
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Ajustes para card e outros elementos já existentes */
+.card {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  width: 90%;
+  height: auto;
+  text-align: center;
+}
+
+.card h2 {
+  font-size: 9rem;
+  font-weight: 900;
+  color: #22223b;
+  margin-bottom: 2rem;
+  letter-spacing: 0.08em;
+  padding: 0 10px;
+}
+
+.card p {
+  font-size: 4rem;
+  color: #0a2240;
+  font-weight: bold;
+}
+
+.side-panel img {
+  width: 32rem;
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.latest-calls {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.latest-calls h3,
+.latest-calls span {
+  font-size: 4rem;
+  color: #0a2240;
+  font-weight: 900;
+}
+
+.latest-calls div {
+  color: #22223b;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.latest-calls ul#lastCallsList {
+  list-style: none;
+  text-align: left;
+}
+
+.latest-calls ul#lastCallsList li {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  color: #0a2240;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.clock {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.clock-time {
+  font-size: 6rem;
+  font-weight: bold;
+  color: #0a2240;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.clock-date {
+  font-size: 2rem;
+  color: #0a2240;
+  font-weight: bold;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove overflow-y: hidden do html/body para permitir rolagem se necessário */
