@@ -5,21 +5,32 @@ const path = require("path");
 const PORT = 3000;
 
 const server = http.createServer((req, res) => {
-  let filePath = "./public" + (req.url === "/" ? "/index.html" : req.url);
+  let filePath = "./app" + (req.url === "/" ? "/index.html" : req.url);
   let extname = String(path.extname(filePath)).toLowerCase();
 
   const mimeTypes = {
     ".html": "text/html",
     ".js": "text/javascript",
     ".css": "text/css",
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".gif": "image/gif",
+    ".ico": "image/x-icon",
   };
 
   const contentType = mimeTypes[extname] || "application/octet-stream";
 
   fs.readFile(filePath, (error, content) => {
     if (error) {
-      res.writeHead(404);
-      res.end("Arquivo não encontrado");
+      if (error.code === "ENOENT") {
+        res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+        res.end(`Arquivo não encontrado: ${req.url}`);
+      } else {
+        res.writeHead(500, { "Content-Type": "text/html; charset=utf-8" });
+        res.end(`Erro ao ler arquivo: ${error.message}`);
+      }
     } else {
       res.writeHead(200, { "Content-Type": contentType });
       res.end(content, "utf-8");
