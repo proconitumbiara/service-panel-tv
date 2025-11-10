@@ -130,18 +130,16 @@ footer {
 }
 
 .card p {
-  font-size: 4rem;
+  font-size: 6rem;
   color: #0a2240;
   font-weight: bold;
 }
 
 .priority-badge {
-  font-size: 3.5rem;
-  color: #d90429;
-  font-weight: 900;
-  margin-bottom: 1rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 6rem;
+  color: #0a2240;
+  font-weight: bold;
+  margin-bottom: 0;
   display: none;
 }
 

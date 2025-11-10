@@ -97,16 +97,19 @@ window.onload = function () {
         const priorityEl = document.getElementById("customerPriority");
         if (nomeEl && setorEl) {
           nomeEl.textContent = data.nome;
-          setorEl.textContent = data.guiche;
-        }
-        // Atualiza a prioridade se existir
-        if (priorityEl) {
-          if (data.prioridade && data.prioridade === "Prioritário") {
-            priorityEl.textContent = data.prioridade;
-            priorityEl.style.display = "block";
+          // Atualiza a prioridade se existir
+          if (priorityEl) {
+            if (data.prioridade && data.prioridade === "Prioritário") {
+              // Concatena "Prioritário - " com o setor
+              setorEl.textContent = `Prioritário - ${data.guiche}`;
+              priorityEl.style.display = "none";
+            } else {
+              priorityEl.textContent = "";
+              priorityEl.style.display = "none";
+              setorEl.textContent = data.guiche;
+            }
           } else {
-            priorityEl.textContent = "";
-            priorityEl.style.display = "none";
+            setorEl.textContent = data.guiche;
           }
         }
         // Opcional: tocar beep e falar nome
