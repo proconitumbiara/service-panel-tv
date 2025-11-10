@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 
 const PORT = 3000;
+// URL do WebSocket - Altere aqui para o IP correto do servidor WebSocket
+const WS_URL = "ws://192.168.1.13:3001";
 
 const server = http.createServer((req, res) => {
   let filePath = "./app" + (req.url === "/" ? "/index.html" : req.url);
@@ -32,8 +34,21 @@ const server = http.createServer((req, res) => {
         res.end(`Erro ao ler arquivo: ${error.message}`);
       }
     } else {
-      res.writeHead(200, { "Content-Type": contentType });
-      res.end(content, "utf-8");
+      // Se for index.html, injeta a URL do WebSocket
+      if (req.url === "/" || req.url === "/index.html") {
+        let htmlContent = content.toString();
+        // Injeta script com a URL do WebSocket antes do fechamento do </head>
+        const wsConfig = `
+    <script>
+      window.WS_URL = "${WS_URL}";
+    </script>`;
+        htmlContent = htmlContent.replace("</head>", wsConfig + "\n  </head>");
+        res.writeHead(200, { "Content-Type": contentType });
+        res.end(htmlContent, "utf-8");
+      } else {
+        res.writeHead(200, { "Content-Type": contentType });
+        res.end(content, "utf-8");
+      }
     }
   });
 });
@@ -52,4 +67,5 @@ server.listen(PORT, "0.0.0.0", () => {
   }
   console.log(`Servidor rodando em http://localhost:${PORT}`);
   console.log(`Acesse também via IP: http://${localIp}:${PORT}`);
+  console.log(`WebSocket configurado: ${WS_URL}`);
 });

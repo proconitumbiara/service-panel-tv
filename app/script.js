@@ -63,11 +63,23 @@ window.onload = function () {
     }
   });
 
+  // URL do WebSocket (injetada pelo servidor ou usa padrão)
+  const wsUrl = window.WS_URL || "ws://localhost:3001";
+  console.log("Conectando ao WebSocket:", wsUrl);
+
   // Conexão com o servidor WebSocket
-  const ws = new WebSocket("ws://localhost:3001");
-  console.log("Conectado ao servidor WebSocket!");
+  const ws = new WebSocket(wsUrl);
   ws.onopen = () => {
+    console.log("Conectado ao servidor WebSocket!");
     ws.send(JSON.stringify({ type: "painel" }));
+  };
+
+  ws.onerror = (error) => {
+    console.error("Erro na conexão WebSocket:", error);
+  };
+
+  ws.onclose = () => {
+    console.log("Conexão WebSocket fechada");
   };
 
   ws.onmessage = (event) => {
@@ -143,7 +155,9 @@ window.onload = function () {
         lastCalls = lastCalls.slice(0, 5);
         renderLastCalls(lastCalls);
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error("Erro ao processar mensagem:", e);
+    }
   };
 };
 
