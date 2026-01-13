@@ -4,7 +4,7 @@ const path = require("path");
 
 const PORT = 3000;
 // URL do WebSocket - Altere aqui para o IP correto do servidor WebSocket
-const WS_URL = "ws://192.168.1.13:3001";
+const WS_URL = process.env.WEBSOCKET_URL;
 
 const server = http.createServer((req, res) => {
   let filePath = "./app" + (req.url === "/" ? "/index.html" : req.url);
